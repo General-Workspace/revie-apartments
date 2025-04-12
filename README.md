@@ -1,0 +1,2 @@
+# Revie Apartments
+Revie Apartments is a web application that allows users to manage their apartment listings, including adding, updating, and deleting listings. It also provides a user-friendly interface for browsing available apartments.
