@@ -35,7 +35,7 @@ public class SwaggerConfig {
                                 .url("http://localhost:8080")
                                 .description("Local server"),
                         new Server()
-                                .url("https://api.revieapartments.com")
+                                .url("https://revie-df4644c5a5ec.herokuapp.com/")
                                 .description("Production server")
                 ))
                 .components(new Components()
