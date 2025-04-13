@@ -1,5 +1,6 @@
 package com.revie.apartments.user.entity;
 
+import com.revie.apartments.user.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +34,10 @@ public class User {
 
     @Column(nullable = false)
     private String lastName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'user'")
+    private UserRole userRole = UserRole.USER;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false, name = "created_at")

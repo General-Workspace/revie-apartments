@@ -6,7 +6,9 @@ import com.revie.apartments.user.dto.DataDto;
 import com.revie.apartments.user.dto.request.SignUpRequestDto;
 import com.revie.apartments.user.dto.response.SignUpResponseDto;
 import com.revie.apartments.user.entity.User;
+import com.revie.apartments.user.enums.UserRole;
 import com.revie.apartments.user.repository.UserRepository;
+import com.revie.apartments.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +23,7 @@ import java.util.Collections;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserUtil userUtil;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws BadRequestException {
@@ -55,8 +58,9 @@ public class UserService implements UserDetailsService {
         user.setUsername(request.username());
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
-        user.setFirstName(request.firstName());
-        user.setLastName(request.lastName());
+        user.setFirstName(userUtil.capitalizeFirstLetterOfName(request.firstName()));
+        user.setLastName(userUtil.capitalizeFirstLetterOfName(request.lastName()));
+        user.setUserRole(request.resolvedUserRole());
 
         userRepository.save(user);
 
@@ -70,6 +74,7 @@ public class UserService implements UserDetailsService {
                         email(user.getEmail()).
                         first_name(user.getFirstName()).
                         last_name(user.getLastName()).
+                        user_role(user.getUserRole()).
                         created_at(user.getCreatedAt()).
                         updated_at(user.getUpdatedAt())
                         .build())

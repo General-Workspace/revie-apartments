@@ -1,6 +1,7 @@
 package com.revie.apartments.user.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.revie.apartments.user.enums.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -25,6 +26,12 @@ public record SignUpRequestDto(
 
         @JsonProperty("last_name")
         @NotBlank(message = "Last name is required")
-        String lastName
+        String lastName,
+
+        @JsonProperty("user_role")
+        UserRole userRole
 ) {
+        public UserRole resolvedUserRole() {
+                return userRole != null ? userRole : UserRole.USER;
+        }
 }

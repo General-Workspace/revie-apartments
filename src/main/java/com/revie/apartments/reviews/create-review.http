@@ -1,0 +1,23 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWliZWluYSIsImlhdCI6MTc0NDU0NjE0MiwiZXhwIjoxNzQ0NjMyNTQyLCJ1c2VyUm9sZSI6W119.D7xvM5Ti2FaaQG177OotBCaxrPSQMiSr_VVNQ7g2lL8
+POST http://localhost:8080/api/v1/reviews
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="request"
+Content-Type: application/json
+
+{
+  "apartment_id": "6afd4959-dc43-4e09-a7e8-aa1417af8ab3",
+  "landlord_rating": 4,
+  "environment_rating": 5,
+  "amenities_rating": 3,
+  "comment": "The apartment is great, but the amenities could be better."
+}
+--WebAppBoundary--
+Content-Disposition: form-data; name="mediaFiles"; filename="dp.jpg"
+Content-Type: image/jpeg
+
+< ../../src/test/resources/images/dp.jpg
+--WebAppBoundary--
+

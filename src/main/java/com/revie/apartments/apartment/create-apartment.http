@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/v1/apartment/new
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZWliZWluYSIsImlhdCI6MTc0NDU0NjE0MiwiZXhwIjoxNzQ0NjMyNTQyLCJ1c2VyUm9sZSI6W119.D7xvM5Ti2FaaQG177OotBCaxrPSQMiSr_VVNQ7g2lL8
+Content-Type: application/json
+
+{
+  "address": "215 Westmollen Avenue",
+  "city": "James Town",
+  "state": "Cambridge",
+  "country": "BlueCave",
+  "zip_code": "22312"
+}

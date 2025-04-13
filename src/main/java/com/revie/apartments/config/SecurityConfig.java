@@ -3,6 +3,7 @@ package com.revie.apartments.config;
 import com.revie.apartments.util.JwtAuthenticationEntryPoint;
 import com.revie.apartments.util.JwtAuthenticationFilter;
 import com.revie.apartments.util.JwtTokenProvider;
+import com.revie.apartments.util.UserUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -54,16 +55,21 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource())
                 )
-                .authorizeHttpRequests(httpRequests ->
-                        httpRequests
+                .authorizeHttpRequests(authorize ->
+                        authorize
                                 .requestMatchers(
                                         "/",
                                         "/docs",
+                                        "/media/**",
                                         "/api/v1/auth/**",
                                         "/swagger-ui/index.html",
                                         "/swagger-ui/**",
                                         "/v3/api-docs",
-                                        "/v3/api-docs/**"
+                                        "/v3/api-docs/**",
+                                        "/api/v1/media/**",
+                                        "/api/v1/reviews/**",
+                                        "/api/v1/apartment/**",
+                                        "/api/v1/votes/**"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 ).exceptionHandling(exception -> exception
@@ -86,5 +92,10 @@ public class SecurityConfig {
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+
+    @Bean
+    public UserUtil userUtil() {
+        return new UserUtil();
     }
 }

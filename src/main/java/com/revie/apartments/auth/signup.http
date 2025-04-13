@@ -6,5 +6,6 @@ Content-Type: application/json
   "email": "aniebietafia@gmail.com",
   "first_name": "aniebiet",
   "last_name": "afia",
-  "password": "Test123$"
+  "password": "test",
+  "user_role": "landlord"
 }
