@@ -44,13 +44,13 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(request));
     }
 
-    @GetMapping("/apartment/{reviewId}")
+    @GetMapping("/apartment/{apartmentId}")
     @Operation(summary = "Get reviews for an apartment")
     public ResponseEntity<?> getReviewsByApartmentId(
-            @PathVariable String reviewId,
+            @PathVariable String apartmentId,
             @RequestParam(required = false) String sortBy
     ) {
-        return ResponseEntity.ok(reviewService.getReviewsByApartmentId(reviewId, sortBy));
+        return ResponseEntity.ok(reviewService.getReviewsByApartmentId(apartmentId, sortBy));
     }
 
     @GetMapping("/{reviewId}")
