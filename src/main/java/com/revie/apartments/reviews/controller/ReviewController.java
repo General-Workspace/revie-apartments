@@ -33,6 +33,7 @@ public class ReviewController {
             @RequestParam @Valid @Min(1) @Max(5) Integer amenitiesRating,
             @RequestParam(required = false) String comment,
             @RequestPart(value = "mediaFiles", required = false) List<MultipartFile> mediaFiles
+//            @Valid @ModelAttribute ReviewRequestDto request
     ) {
 
         ReviewRequestDto request = ReviewRequestDto.builder()
@@ -44,8 +45,8 @@ public class ReviewController {
                 .mediaFiles(mediaFiles != null ? mediaFiles : List.of())
                 .build();
 
-        if (mediaFiles != null) {
-            for (MultipartFile file : mediaFiles) {
+        if (request.mediaFiles() != null) {
+            for (MultipartFile file : request.mediaFiles()) {
                 if (file.getSize() > 10 * 1024 * 1024) {
                     throw new IllegalArgumentException("File size exceeds the limit of 10MB");
                 }

@@ -1,6 +1,5 @@
 package com.revie.apartments.reviews.service;
 
-import com.revie.apartments.apartment.dto.ApartmentDataDto;
 import com.revie.apartments.apartment.entity.Apartment;
 import com.revie.apartments.apartment.repository.ApartmentRepository;
 import com.revie.apartments.exceptions.NotFoundException;

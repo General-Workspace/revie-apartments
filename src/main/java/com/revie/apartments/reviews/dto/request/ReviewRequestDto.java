@@ -1,7 +1,5 @@
 package com.revie.apartments.reviews.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
 import java.util.List;
 
 @Builder
@@ -31,9 +28,11 @@ public record ReviewRequestDto(
         @Min(1) @Max(5)
         Integer amenitiesRating,
 
-        @Schema(description = "Review comment", requiredMode = Schema.RequiredMode.NOT_REQUIRED, example = "Great place to live!")
+        @Schema(description = "Review comment", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
         String comment,
 
-        @Schema(description = "Media files for the review", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+        @Schema(description = "Upload Media files for the review. (Click on the - sign to remove the field if you don't want to upload any media files)",
+                requiredMode =
+                Schema.RequiredMode.NOT_REQUIRED)
                 List<MultipartFile> mediaFiles
 ) {}
