@@ -3,6 +3,7 @@ package com.revie.apartments.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
@@ -39,6 +40,9 @@ public class SwaggerConfig {
                                 .description("Production server")
                 ))
                 .components(new Components()
+                        .addSchemas("file", new Schema()
+                                .type("string")
+                                .format("binary"))
                         .addSecuritySchemes("bearerAuth",
                                 new SecurityScheme()
                                         .name("bearerAuth")

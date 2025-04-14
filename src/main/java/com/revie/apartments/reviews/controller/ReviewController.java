@@ -1,13 +1,13 @@
 package com.revie.apartments.reviews.controller;
 
 import com.revie.apartments.reviews.dto.request.ReviewRequestDto;
-import com.revie.apartments.reviews.dto.response.ReviewResponseDto;
-import com.revie.apartments.reviews.entity.Review;
 import com.revie.apartments.reviews.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +27,22 @@ public class ReviewController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Create a new review")
     public ResponseEntity<?> createReview(
-            @RequestPart("request") @Valid ReviewRequestDto request,
+            @RequestParam @Valid String apartmentId,
+            @RequestParam @Valid @Min(1) @Max(5) Integer landlordRating,
+            @RequestParam @Valid @Min(1) @Max(5) Integer environmentRating,
+            @RequestParam @Valid @Min(1) @Max(5) Integer amenitiesRating,
+            @RequestParam(required = false) String comment,
             @RequestPart(value = "mediaFiles", required = false) List<MultipartFile> mediaFiles
-            ) {
+    ) {
 
-        request.setMediaFiles(mediaFiles);
+        ReviewRequestDto request = ReviewRequestDto.builder()
+                .apartmentId(apartmentId)
+                .landlordRating(landlordRating)
+                .environmentRating(environmentRating)
+                .amenitiesRating(amenitiesRating)
+                .comment(comment)
+                .mediaFiles(mediaFiles != null ? mediaFiles : List.of())
+                .build();
 
         if (mediaFiles != null) {
             for (MultipartFile file : mediaFiles) {

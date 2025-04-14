@@ -64,8 +64,8 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
 
         // Handle media files if any
-        if (!request.getMediaFiles().isEmpty()) {
-            request.getMediaFiles().stream()
+        if (request.mediaFiles() != null && !request.mediaFiles().isEmpty()) {
+            request.mediaFiles().stream()
                     .filter(file -> !file.isEmpty())
                     .forEach(file -> {
                         try {
